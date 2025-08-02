@@ -1,0 +1,10 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.cjproductions.vicinity",
+        "sha256_cert_fingerprints": ["02:EC:8B:86:CA:16:11:26:90:BD:B2:3B:73:91:D6:F7:CA:75:DA:05"]
+      }
+    }
+]
