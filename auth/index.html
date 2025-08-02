@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Verified - Vicinity Ltd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="content">
+        <h1>Account Verification</h1>
+        <div id="app-detected" style="display: none;">
+            <p>✅ Your account has been verified successfully!</p>
+            <p>Opening the Vicinity app...</p>
+        </div>
+        <div id="app-not-detected">
+            <p>✅ Your account has been verified!</p>
+            <p>Please open the Vicinity app to continue, or contact support if you need assistance installing the app.</p>
+            <button onclick="tryOpenApp()">Try Opening App Again</button>
+        </div>
+    </div>
+
+    <script>
+        let appOpened = false;
+        
+        function tryOpenApp() {
+            // Extract any tokens from URL parameters if needed
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token') || '';
+            
+            // Attempt to open the app with parameters
+            const customScheme = `vicinityltd://auth?token=${token}`;
+            
+            // Use iframe method for better detection
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = customScheme;
+            document.body.appendChild(iframe);
+            
+            // Check if app opened using visibility change
+            setTimeout(() => {
+                if (document.webkitHidden || document.hidden) {
+                    appOpened = true;
+                    document.getElementById('app-detected').style.display = 'block';
+                    document.getElementById('app-not-detected').style.display = 'none';
+                }
+                document.body.removeChild(iframe);
+            }, 1000);
+        }
+        
+        // Try to open app immediately when page loads
+        window.onload = function() {
+            tryOpenApp();
+        };
+        
+        // Listen for visibility changes to detect app opening
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && !appOpened) {
+                appOpened = true;
+                document.getElementById('app-detected').style.display = 'block';
+                document.getElementById('app-not-detected').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
