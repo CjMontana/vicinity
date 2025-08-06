@@ -3,7 +3,7 @@
       "apps": [],
       "details": [
         {
-          "appID": "123.com.cjproductions.vicinity",
+          "appID": "com.cjproductions.vicinity",
           "paths": ["*"]
         }
       ]
