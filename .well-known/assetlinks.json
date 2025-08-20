@@ -1,5 +1,11 @@
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
-  "target" : { "namespace": "android_app", "package_name": "com.cjproductions.vicinity",
-               "sha256_cert_fingerprints": ["73:CB:05:99:CE:04:FD:C7:3F:15:EF:4B:C4:7F:85:A2:2E:BF:F3:DD:B4:97:9F:EE:CE:5D:1F:9E:F9:39:FB:F1"] }
+  "target": { 
+    "namespace": "android_app", 
+    "package_name": "com.cjproductions.vicinity",
+    "sha256_cert_fingerprints": [
+      "73:CB:05:99:CE:04:FD:C7:3F:15:EF:4B:C4:7F:85:A2:2E:BF:F3:DD:B4:97:9F:EE:CE:5D:1F:9E:F9:39:FB:F1",
+      "0B:32:20:6D:C9:7F:78:84:AA:43:13:66:EF:58:06:95:60:2C:43:D4:64:42:EC:FA:AE:26:36:BA:56:3B:CF:6F"
+    ]
+  }
 }]
