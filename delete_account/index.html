@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Deletion Request - NEXUS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .section-content {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .section-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .deletion-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .warning-box {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning-box .warning-title {
+            font-weight: bold;
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 2rem; }
+            .subtitle { font-size: 1.2rem; }
+            .content-card { padding: 1.5rem; }
+            .container { padding: 20px 15px; }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="logo">✨ NEXUS</h1>
+            <h2 class="subtitle">Account Deletion Request</h2>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">📋 How to Request Account Deletion</div>
+            <div class="section-content">
+                To request deletion of your NEXUS account and associated data, please follow these steps:
+                <ul>
+                    <li>Fill out the form below with your registered email address</li>
+                    <li>Provide a brief reason for deletion (optional)</li>
+                    <li>Submit the request</li>
+                    <li>You will receive a confirmation email within 24 hours</li>
+                    <li>Account deletion will be processed within 30 days</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">🗑️ What Data Will Be Deleted</div>
+            <div class="section-content">
+                When you request account deletion, the following data will be permanently removed:
+                <ul>
+                    <li>Your account profile and personal information</li>
+                    <li>App usage data and preferences</li>
+                    <li>User-generated content and files</li>
+                    <li>Communication history within the app</li>
+                    <li>Device and analytics data</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <div class="warning-title">⚠️ Important Notice</div>
+                Some data may be retained for legal compliance purposes for up to 90 days after deletion request. This includes transaction records and data required by law. All other personal data will be permanently deleted within 30 days.
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">📝 Submit Deletion Request</div>
+            
+            <div class="success-message" id="successMessage">
+                ✅ Your deletion request has been submitted successfully! You will receive a confirmation email shortly.
+            </div>
+
+            <form class="deletion-form" id="deletionForm">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" class="form-input" 
+                           placeholder="Enter your registered email address" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="reason">Reason for Deletion (Optional)</label>
+                    <textarea id="reason" name="reason" class="form-textarea" 
+                              placeholder="Please let us know why you're deleting your account (this helps us improve our service)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="confirm" name="confirm" required style="margin-right: 10px;">
+                        I understand that this action is irreversible and all my data will be permanently deleted.
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Deletion Request</button>
+            </form>
+        </div>
+
+        <div class="content-card">
+            <div class="section-title">📞 Need Help?</div>
+            <div class="section-content">
+                If you have questions about account deletion or need assistance, please contact our support team:
+                <br><br>
+                📧 Email: support@nexus-app.com<br>
+                ⏰ Response time: Within 24 hours
+            </div>
+        </div>
+
+        <a href="#" class="back-link">← Back to App</a>
+    </div>
+
+    <div class="footer">
+        © 2024 NEXUS - Your privacy and data rights are important to us
+    </div>
+
+    <script>
+        // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 50;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('deletionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const reason = document.getElementById('reason').value;
+            const confirmed = document.getElementById('confirm').checked;
+
+            if (!email || !confirmed) {
+                alert('Please fill in all required fields and confirm your request.');
+                return;
+            }
+
+            // Here you would normally send the data to your server
+            // For now, we'll simulate the submission
+            
+            // Create mailto link for the deletion request
+            const subject = encodeURIComponent('Account Deletion Request - NEXUS');
+            const body = encodeURIComponent(`
+Account Deletion Request
+
+Email: ${email}
+Reason: ${reason || 'Not specified'}
+Date: ${new Date().toLocaleDateString()}
+
+Please process this account deletion request according to your data retention policy.
+
+Thank you.
+            `);
+            
+            // You should replace 'support@nexus-app.com' with your actual support email
+            const mailtoLink = `mailto:support@nexus-app.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Reset form
+            this.reset();
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Initialize stars when page loads
+        window.addEventListener('load', createStars);
+
+        // Add cursor trail effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.style.position = 'fixed';
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.width = '4px';
+            cursor.style.height = '4px';
+            cursor.style.background = 'rgba(255, 255, 255, 0.6)';
+            cursor.style.borderRadius = '50%';
+            cursor.style.pointerEvents = 'none';
+            cursor.style.zIndex = '9999';
+            cursor.style.animation = 'fadeOut 1s ease-out forwards';
+            
+            document.body.appendChild(cursor);
+            
+            setTimeout(() => {
+                cursor.remove();
+            }, 1000);
+        });
+
+        // Add fadeOut animation for cursor trail
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
